@@ -1,7 +1,7 @@
 # Tic-Tac-Toe
 This game is only use for the clear the bacis of the if,else if,for,funtion,etc;
 
-Patern of the gmae 
+Pattern of the game 
 1 2 3
 4 5 6
 7 8 9
