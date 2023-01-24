@@ -10,18 +10,23 @@ char player = 'X';
 void draw()
 {
     system("cls"); // Window goes clean after every entry;
-    
+    cout<<"\t\t\t\t\t\t PRESS BOARD NUMBER\n\n\n\n"<<endl;
+    cout<<"\t\t\t\t\t\t Player: "<<player<<" Turn:\n\n\n"<<endl;
+    cout<<"\t\t\t\t\t\t---+---+---+"<<endl;
     for (int i = 0; i < 3; i++)
     {
+        cout<<"\t\t\t\t\t\t| ";
         for (int j = 0; j < 3; j++)
         {
-            cout<<matrix[i][j]<<" ";
+            cout<<matrix[i][j]<<" | ";
         }
-        
         cout<<endl;
+        
     }
+    cout<<"\t\t\t\t\t\t---+---+---+"<<endl;
     
 }
+
 // 00 01 02
 // 10 11 12
 // 20 21 22
@@ -52,6 +57,19 @@ char program_tic()
     return '/';
     
 }
+void clear_time(){
+    for(int i=0;i<10;i++){
+        vis[i] = 0;
+    }
+    int cont = 1;
+
+    for(int i=0;i<3;i++){
+        for(int j=0;j<3;j++){
+            matrix[i][j] = cont+'0';
+            cont++;
+        }
+    }
+}
 void tople()
 {
     if(player == 'X')
@@ -59,6 +77,7 @@ void tople()
     else 
     player = 'X';
 }
+
 void Input()
 {
     
@@ -92,6 +111,10 @@ void Input()
     tople();}
 
 }
+// void winner_draw(char value){
+
+//     while()
+// }
 int main()
 {
     system("cls");
@@ -99,45 +122,60 @@ int main()
 
     cout<<"Wellcome to the Tic-Tac_Toe game"<<endl;
     cout<<"Press key according to play"<<endl;
-    cout<<"1) Press 1 for Double player"<<endl;
-    cout<<"2) Press 2 for Exit the game"<<endl;
+    cout<<"*********************************"<<endl;
+    cout<<"1) Press 1 For Double Player"<<endl;
+    cout<<"2) Press 2 For Exit The Game"<<endl;
+    cout<<"*********************************"<<endl;
     int a ;
     cin>>a;
+
+    
     if(a == 1)
    { 
+        cout<<"Choose Your Player"<<endl;
+        cout<<"1) First Player X"<<endl;
+        cout<<"2) Second Player O"<<endl;
+        int choice;
+        cin>>choice;
+
+        if(choice == 2){
+            player = 'O';
+        }
+        else{
+            player = 'X';
+        }
+
+        clear_time();
         draw();
 
         while (1)
         {
             Input();
             draw();
-            if(program_tic() == 'X')
-            {cout<<"Player X Win!!!";
-            break;}
-            else if(program_tic() == 'O')
-            {cout<<"Player O Win!!!";
-            break;}
-            else
-            {
+            if(program_tic() == 'X'){
+                cout<<"\n*****Player X Win!!!*****\n\n\n\n";
+                goto play_again;
+            }
+            else if(program_tic() == 'O'){
+                cout<<"\n*****Player O Win!!!*****\n\n\n\n";
+                goto play_again;
+            }
+            else{
                 bool ok = true;
                 for(int i=1;i<=9;i++)
-                if(!vis[i])
-                ok = false;
+                    if(!vis[i])
+                        ok = false;
 
-                if(ok)
-                {cout << "Tie Nobody Win";
-                break;
-                cout<<endl;
-                cout<<"If you wand to try again press 1";
-                int a;
-                cin>>a;
-                if(a == 1)
-                {goto play_again;}}
+                if(ok){
+                    cout << "*****Tie Nobody Win*****\n\n\n\n";
+                    goto play_again;
+                }
             }
         }
     }
-    else
-    {system("exit");}
+    else{
+        system("exit");
+    }
     
 
 }
